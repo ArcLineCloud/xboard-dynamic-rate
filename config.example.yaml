@@ -1,0 +1,15 @@
+host: 
+admin_path: 
+admin_account: 
+admin_password: 
+
+nodes:
+  - id: 1110
+    type: shadowsocks
+    rate_config:
+      - rate: "0.5"
+        start_time: "03:00:00"
+        end_time: "08:59:59"
+      - rate: "1"
+        start_time: "09:00:00"
+        end_time: "02:59:59"
