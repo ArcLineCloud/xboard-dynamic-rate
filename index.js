@@ -216,7 +216,14 @@ class DynamicRate {
 (async () => {
   try {
     const dmRate = new DynamicRate();
-    await dmRate.changeRate();
+    while (true) {
+      await dmRate.changeRate();
+      const now = tz(SHANGHAI_TZ);
+      const nextHour = now.clone().add(1, 'hour').startOf('hour');
+      const waitMs = nextHour.diff(now);
+      log(`等待到下一个整点 ${nextHour.format('HH:mm:ss')} 进行检查...`);
+      await new Promise(resolve => setTimeout(resolve, waitMs));
+    }
   } catch (error) {
     log(`脚本运行失败: ${error.message}`, "error");
   }
